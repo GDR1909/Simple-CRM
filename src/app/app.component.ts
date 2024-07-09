@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
-import { MainContentComponent } from './main-content/main-content.component';
-import { FooterComponent } from './shared/components/footer/footer.component';
-import { SidenavComponent } from './shared/components/sidenav/sidenav.component';
+import { RouterLink, RouterLinkActive, RouterModule, RouterOutlet } from '@angular/router';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-root',
@@ -11,9 +11,12 @@ import { SidenavComponent } from './shared/components/sidenav/sidenav.component'
   imports: [
     CommonModule,
     RouterOutlet,
-    MainContentComponent,
-    FooterComponent,
-    SidenavComponent,
+    RouterLink,
+    RouterLinkActive,
+    RouterModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatIconModule
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
