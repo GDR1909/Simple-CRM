@@ -4,6 +4,7 @@ import { RouterLink, RouterLinkActive, RouterModule, RouterOutlet } from '@angul
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +17,8 @@ import { MatIconModule } from '@angular/material/icon';
     RouterModule,
     MatSidenavModule,
     MatToolbarModule,
-    MatIconModule
+    MatIconModule,
+    MatDialogModule
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
