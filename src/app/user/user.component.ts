@@ -8,6 +8,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddUserComponent } from '../dialog-add-user/dialog-add-user.component';
+import { User } from '../../models/user.class';
 
 @Component({
   selector: 'app-user',
@@ -20,7 +21,7 @@ import { DialogAddUserComponent } from '../dialog-add-user/dialog-add-user.compo
     ReactiveFormsModule,
     CdkScrollable,
     MatSelectModule,
-    MatFormFieldModule
+    MatFormFieldModule,
   ],
   templateUrl: './user.component.html',
   styleUrl: './user.component.scss',
@@ -28,8 +29,11 @@ import { DialogAddUserComponent } from '../dialog-add-user/dialog-add-user.compo
 export class UserComponent {
   positionOptions: TooltipPosition[] = ['below', 'above', 'left', 'right'];
   position = new FormControl(this.positionOptions[1]);
+  user: User = new User();
+
 
   constructor(public dialog: MatDialog) {}
+
 
   openDialog() {
     this.dialog.open(DialogAddUserComponent);

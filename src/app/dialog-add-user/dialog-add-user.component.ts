@@ -12,6 +12,7 @@ import {
   MatDatepickerToggle,
 } from '@angular/material/datepicker';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { User } from '../../models/user.class';
 
 @Component({
   selector: 'app-dialog-add-user',
@@ -36,9 +37,17 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   styleUrl: './dialog-add-user.component.scss',
 })
 export class DialogAddUserComponent {
-  dateFilter = (d: Date | null): boolean => {
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    return (d || new Date()) >= today;
-  };
+  user: User = new User();
+  birthDate: Date;
+
+
+  constructor() {
+    this.birthDate = new Date();
+  }
+
+
+  saveUser() {
+    this.user.birthDate = this.birthDate.getTime();
+    console.log('Current user is:', this.user);
+  }
 }
