@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatDialogActions, MatDialogContent } from '@angular/material/dialog';
 import { MatFormField, MatHint, MatLabel } from '@angular/material/form-field';
 import { MatInput, MatInputModule } from '@angular/material/input';
@@ -13,6 +13,8 @@ import {
 } from '@angular/material/datepicker';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { User } from '../../models/user.class';
+import { Firestore, addDoc, collection } from '@angular/fire/firestore';
+import { doc, setDoc } from "firebase/firestore";
 
 @Component({
   selector: 'app-dialog-add-user',
@@ -39,10 +41,12 @@ import { User } from '../../models/user.class';
 export class DialogAddUserComponent {
   user: User = new User();
   birthDate: Date;
+  firestore: Firestore;
 
 
   constructor() {
     this.birthDate = new Date();
+    this.firestore = inject(Firestore);
   }
 
 
