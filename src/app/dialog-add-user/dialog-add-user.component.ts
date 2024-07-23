@@ -13,8 +13,10 @@ import {
 } from '@angular/material/datepicker';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { User } from '../../models/user.class';
-import { Firestore, addDoc, collection } from '@angular/fire/firestore';
-import { doc, setDoc } from "firebase/firestore";
+// import { Firestore, collection, collectionData } from '@angular/fire/firestore';
+// import { Observable } from 'rxjs';
+import { initializeApp } from 'firebase/app';
+import { getFirestore } from 'firebase/firestore';
 
 @Component({
   selector: 'app-dialog-add-user',
@@ -33,7 +35,7 @@ import { doc, setDoc } from "firebase/firestore";
     MatInputModule,
     MatNativeDateModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   templateUrl: './dialog-add-user.component.html',
   styleUrl: './dialog-add-user.component.scss',
@@ -41,14 +43,13 @@ import { doc, setDoc } from "firebase/firestore";
 export class DialogAddUserComponent {
   user: User = new User();
   birthDate: Date;
-  firestore: Firestore;
 
+  // firestore: Firestore = inject(Firestore);
 
   constructor() {
     this.birthDate = new Date();
-    this.firestore = inject(Firestore);
+    // const aCollection = collection(this.firestore, 'items')
   }
-
 
   saveUser() {
     this.user.birthDate = this.birthDate.getTime();

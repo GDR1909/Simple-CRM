@@ -1,6 +1,4 @@
-import { Component, inject } from '@angular/core';
-import { Firestore, collection, collectionData } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   RouterLink,
@@ -38,11 +36,6 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 })
 export class AppComponent {
   title = 'simple-crm';
-  firestore: Firestore = inject(Firestore);
-  items$: Observable<any[]>;
 
-  constructor() {
-    const aCollection = collection(this.firestore, 'items')
-    this.items$ = collectionData(aCollection);
-  }
+  constructor() {}
 }
