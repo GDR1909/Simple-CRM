@@ -13,10 +13,8 @@ import {
 } from '@angular/material/datepicker';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { User } from '../../models/user.class';
-// import { Firestore, collection, collectionData } from '@angular/fire/firestore';
-// import { Observable } from 'rxjs';
-import { initializeApp } from 'firebase/app';
-import { getFirestore } from 'firebase/firestore';
+import { Firestore, collection, addDoc } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-dialog-add-user',
@@ -43,16 +41,24 @@ import { getFirestore } from 'firebase/firestore';
 export class DialogAddUserComponent {
   user: User = new User();
   birthDate: Date;
-
-  // firestore: Firestore = inject(Firestore);
+  firestore: Firestore = inject(Firestore);
 
   constructor() {
     this.birthDate = new Date();
-    // const aCollection = collection(this.firestore, 'items')
   }
 
-  saveUser() {
+  async saveUser() {
     this.user.birthDate = this.birthDate.getTime();
     console.log('Current user is:', this.user);
+
+    const docRef = await addDoc(collection(this.firestore, 'users'), {
+      firstName: this.user.firstName,
+      lastName: this.user.lastName,
+      birthDate: this.user.birthDate,
+      street: this.user.street,
+      zipCode: this.user.zipCode,
+      city: this.user.city
+    });
+    console.log('Document written with ID: ', docRef.id);
   }
 }
