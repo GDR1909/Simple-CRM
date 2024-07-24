@@ -15,6 +15,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { User } from '../../models/user.class';
 import { Firestore, collection, addDoc } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-dialog-add-user',
@@ -34,6 +36,8 @@ import { Observable } from 'rxjs';
     MatNativeDateModule,
     FormsModule,
     ReactiveFormsModule,
+    MatProgressBarModule,
+    CommonModule,
   ],
   templateUrl: './dialog-add-user.component.html',
   styleUrl: './dialog-add-user.component.scss',
@@ -41,24 +45,34 @@ import { Observable } from 'rxjs';
 export class DialogAddUserComponent {
   user: User = new User();
   birthDate: Date;
+  loading = false;
   firestore: Firestore = inject(Firestore);
+
 
   constructor() {
     this.birthDate = new Date();
   }
 
+
   async saveUser() {
     this.user.birthDate = this.birthDate.getTime();
     console.log('Current user is:', this.user);
+    this.loading = true;
 
-    const docRef = await addDoc(collection(this.firestore, 'users'), {
+    await addDoc(collection(this.firestore, 'users'), {
       firstName: this.user.firstName,
       lastName: this.user.lastName,
       birthDate: this.user.birthDate,
       street: this.user.street,
       zipCode: this.user.zipCode,
       city: this.user.city
-    });
-    console.log('Document written with ID: ', docRef.id);
+    }).catch(
+      (err) => { console.error(err) }
+    ).then(
+      (docRef) => {
+        console.log('Document written with ID: ', docRef?.id),
+        this.loading = false;
+      },
+    );
   }
 }

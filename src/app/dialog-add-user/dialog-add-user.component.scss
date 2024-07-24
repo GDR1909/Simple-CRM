@@ -1,3 +1,11 @@
 .dialogAddUser {
+    position: relative;
     padding: 16px;
+
+    mat-progress-bar {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+    }
 }
