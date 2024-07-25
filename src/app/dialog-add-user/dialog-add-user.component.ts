@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { MatDialogActions, MatDialogContent } from '@angular/material/dialog';
+import { MatDialogActions, MatDialogContent, MatDialogRef } from '@angular/material/dialog';
 import { MatFormField, MatHint, MatLabel } from '@angular/material/form-field';
 import { MatInput, MatInputModule } from '@angular/material/input';
 import {
@@ -49,7 +49,7 @@ export class DialogAddUserComponent {
   firestore: Firestore = inject(Firestore);
 
 
-  constructor() {
+  constructor(public dialogRef: MatDialogRef<DialogAddUserComponent>) {
     this.birthDate = new Date();
   }
 
@@ -72,6 +72,7 @@ export class DialogAddUserComponent {
       (docRef) => {
         console.log('Document written with ID: ', docRef?.id),
         this.loading = false;
+        this.dialogRef.close();
       },
     );
   }
