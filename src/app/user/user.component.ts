@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -9,6 +9,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddUserComponent } from '../dialog-add-user/dialog-add-user.component';
 import { User } from '../../models/user.class';
+import { MatCardModule } from '@angular/material/card';
+
 
 @Component({
   selector: 'app-user',
@@ -22,9 +24,11 @@ import { User } from '../../models/user.class';
     CdkScrollable,
     MatSelectModule,
     MatFormFieldModule,
+    MatCardModule
   ],
   templateUrl: './user.component.html',
   styleUrl: './user.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserComponent {
   positionOptions: TooltipPosition[] = ['below', 'above', 'left', 'right'];
