@@ -1,16 +1,56 @@
+mat-card {
+  padding: 10px;
+}
+
 .addUserBtn {
-    position: absolute;
-    right: 56px;
-    bottom: 56px;
+  position: absolute;
+  right: 56px;
+  bottom: 56px;
 }
 
 .userTable {
-    width: 100%;
+  width: 100%;
+  border-collapse: collapse;
+
+  tr {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+    transition: ease-in-out 250ms;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.1);
+      transition: ease-in-out 250ms;
+    }
+
+    &:first-child {
+      cursor: unset;
+
+      &:hover {
+        background-color: unset;
+      }
+    }
+
+    &:last-child {
+      border-bottom: 0;
+    }
 
     th {
-        color: rgba(0, 0, 0, 0.4);
-        font-size: 14px;
-        font-weight: 500;
-        text-align: start;
+      color: rgba(0, 0, 0, 0.4);
+      font-size: 14px;
+      font-weight: 500;
+      text-align: start;
+
+      &:first-child {
+        padding-left: 16px;
+      }
     }
+
+    td {
+      height: 48px;
+
+      &:first-child {
+        padding-left: 16px;
+      }
+    }
+  }
 }
