@@ -9,11 +9,13 @@
                 <th>City</th>
             </tr>
 
-            <tr>
-                <td>Davide</td>
-                <td>mail&#64;muster.com</td>
-                <td>Stuttgart</td>
-            </tr>
+            @for (user of allUsers; track user) {
+                <tr>
+                    <td>{{ user.firstName }} {{ user.lastName }}</td>
+                    <td>mail&#64;muster.com</td>
+                    <td>{{ user.city }}</td>
+                </tr>
+            }
         </tbody>
     </table>
 </mat-card>

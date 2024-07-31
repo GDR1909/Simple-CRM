@@ -12,7 +12,7 @@ import { User } from '../../models/user.class';
 import { MatCardModule } from '@angular/material/card';
 import { Firestore, collection, doc, collectionData, onSnapshot } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-user',
@@ -26,7 +26,8 @@ import { Observable } from 'rxjs';
     CdkScrollable,
     MatSelectModule,
     MatFormFieldModule,
-    MatCardModule
+    MatCardModule,
+    CommonModule,
   ],
   templateUrl: './user.component.html',
   styleUrl: './user.component.scss',
@@ -38,15 +39,16 @@ export class UserComponent {
   user: User = new User();
   firestore: Firestore = inject(Firestore);
   unsub;
-  allUsers = [];
+  allUsers: User[] = [];
 
 
   constructor(public dialog: MatDialog) {
-    this.unsub = onSnapshot(collection(this.firestore, "users"), (list) => {
-      list.forEach(element => {
+    this.unsub = onSnapshot(collection(this.firestore, 'users'), (list) => {
+      list.forEach((element) => {
         console.log(element.data());
-        // this.allUsers.push(element);
-      })
+        this.allUsers.push(element.data() as User);
+        console.log(this.allUsers);
+      });
     });
   }
 
