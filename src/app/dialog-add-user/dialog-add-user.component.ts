@@ -2,15 +2,8 @@ import { Component, inject } from '@angular/core';
 import { MatDialogActions, MatDialogContent, MatDialogRef } from '@angular/material/dialog';
 import { MatFormField, MatHint, MatLabel } from '@angular/material/form-field';
 import { MatInput, MatInputModule } from '@angular/material/input';
-import {
-  MatNativeDateModule,
-  provideNativeDateAdapter,
-} from '@angular/material/core';
-import {
-  MatDatepicker,
-  MatDatepickerModule,
-  MatDatepickerToggle,
-} from '@angular/material/datepicker';
+import { MatNativeDateModule, provideNativeDateAdapter } from '@angular/material/core';
+import { MatDatepicker, MatDatepickerModule, MatDatepickerToggle } from '@angular/material/datepicker';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { User } from '../../models/user.class';
 import { Firestore, collection, addDoc } from '@angular/fire/firestore';
@@ -62,6 +55,7 @@ export class DialogAddUserComponent {
     await addDoc(collection(this.firestore, 'users'), {
       firstName: this.user.firstName,
       lastName: this.user.lastName,
+      email: this.user.email,
       birthDate: this.user.birthDate,
       street: this.user.street,
       zipCode: this.user.zipCode,
