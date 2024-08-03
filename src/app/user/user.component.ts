@@ -10,9 +10,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogAddUserComponent } from '../dialog-add-user/dialog-add-user.component';
 import { User } from '../../models/user.class';
 import { MatCardModule } from '@angular/material/card';
-import { Firestore, collection, doc, collectionData, onSnapshot } from '@angular/fire/firestore';
+import { Firestore, collection, doc, collectionData, onSnapshot, QuerySnapshot, DocumentData } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-user',
@@ -40,15 +41,18 @@ export class UserComponent {
   firestore: Firestore = inject(Firestore);
   unsub;
   allUsers: User[] = [];
-
+  private cdr: ChangeDetectorRef = inject(ChangeDetectorRef);
+  
 
   constructor(public dialog: MatDialog) {
     this.unsub = onSnapshot(collection(this.firestore, 'users'), (list) => {
+      this.allUsers = [];  // Reset the array to avoid duplicate entries
       list.forEach((element) => {
         console.log(element.data());
         this.allUsers.push(element.data() as User);
-        console.log(this.allUsers);
       });
+      console.log(this.allUsers);
+      this.cdr.markForCheck();  // Manuell die Change Detection auslösen
     });
   }
 
