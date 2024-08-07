@@ -1,13 +1,15 @@
 import { Component, inject } from '@angular/core';
 import { Firestore, onSnapshot, doc, collection } from '@angular/fire/firestore';
 import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { ActivatedRoute } from '@angular/router';
 import { User } from '../../models/user.class';
 
 @Component({
   selector: 'app-user-detail',
   standalone: true,
-  imports: [MatCardModule],
+  imports: [MatCardModule, MatButtonModule, MatIconModule],
   templateUrl: './user-detail.component.html',
   styleUrl: './user-detail.component.scss'
 })
@@ -31,5 +33,10 @@ export class UserDetailComponent {
       this.user = new User(user.data());
       console.log('Retrieved user:', this.user);
     }));
+  }
+
+
+  openAddressDialog() {
+    
   }
 }

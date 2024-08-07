@@ -1,6 +1,6 @@
 mat-card {
-    flex-direction: unset;
-    padding: 10px;
+  flex-direction: unset;
+  padding: 10px;
 }
 
 .userDetailHeader {
@@ -18,18 +18,24 @@ mat-card {
 }
 
 .userDetails {
-    height: 100px;
-    margin-left: 32px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  height: 100px;
+  margin-left: 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
-    h2, h3 {
-        margin: 0;
-    }
+  h2, h3 {
+    margin: 0;
+  }
 }
 
 .address {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
+}
+
+.pinRightUpperCorner {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
