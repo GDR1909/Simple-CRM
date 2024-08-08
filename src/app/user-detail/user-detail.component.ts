@@ -3,13 +3,14 @@ import { Firestore, onSnapshot, doc, collection } from '@angular/fire/firestore'
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 import { ActivatedRoute } from '@angular/router';
 import { User } from '../../models/user.class';
 
 @Component({
   selector: 'app-user-detail',
   standalone: true,
-  imports: [MatCardModule, MatButtonModule, MatIconModule],
+  imports: [MatCardModule, MatButtonModule, MatIconModule, MatMenuModule],
   templateUrl: './user-detail.component.html',
   styleUrl: './user-detail.component.scss'
 })
@@ -36,7 +37,12 @@ export class UserDetailComponent {
   }
 
 
-  openAddressDialog() {
+  editUserDetail() {
+    
+  }
+
+
+  editMenu() {
     
   }
 }
