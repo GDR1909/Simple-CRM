@@ -6,6 +6,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { ActivatedRoute } from '@angular/router';
 import { User } from '../../models/user.class';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogEditAddressComponent } from '../dialog-edit-address/dialog-edit-address.component';
+import { DialogEditUserComponent } from '../dialog-edit-user/dialog-edit-user.component';
+
 
 @Component({
   selector: 'app-user-detail',
@@ -18,6 +22,7 @@ export class UserDetailComponent {
   userId: any = '';
   user: User = new User();
   firestore: Firestore = inject(Firestore);
+  public dialog = inject(MatDialog);
 
 
   constructor(private route: ActivatedRoute) {
@@ -38,11 +43,11 @@ export class UserDetailComponent {
 
 
   editUserDetail() {
-    
+    this.dialog.open(DialogEditUserComponent);
   }
 
 
   editMenu() {
-    
+    this.dialog.open(DialogEditAddressComponent);
   }
 }
