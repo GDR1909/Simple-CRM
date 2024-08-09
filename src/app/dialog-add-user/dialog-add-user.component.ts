@@ -30,7 +30,7 @@ import { CommonModule } from '@angular/common';
     FormsModule,
     ReactiveFormsModule,
     MatProgressBarModule,
-    CommonModule,
+    CommonModule
   ],
   templateUrl: './dialog-add-user.component.html',
   styleUrl: './dialog-add-user.component.scss',
@@ -52,22 +52,19 @@ export class DialogAddUserComponent {
     console.log('Current user is:', this.user);
     this.loading = true;
 
-    await addDoc(collection(this.firestore, 'users'), {
-      firstName: this.user.firstName,
-      lastName: this.user.lastName,
-      email: this.user.email,
-      birthDate: this.user.birthDate,
-      street: this.user.street,
-      zipCode: this.user.zipCode,
-      city: this.user.city
-    }).catch(
-      (err) => { console.error(err) }
-    ).then(
-      (docRef) => {
-        console.log('Document written with ID: ', docRef?.id),
+    await addDoc(this.getUsersRef(), this.user.toJSON())
+      .catch((err) => {
+        console.log(err);
+      })
+      .then((docRef) => {
+        console.log('Document written with ID:', docRef?.id);
         this.loading = false;
         this.dialogRef.close();
-      },
-    );
+      });
+  }
+
+
+  getUsersRef() {
+    return collection(this.firestore, 'users');
   }
 }

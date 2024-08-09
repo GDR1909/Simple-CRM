@@ -6,7 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { MatFormField, MatHint, MatLabel } from '@angular/material/form-field';
 import { MatInput, MatInputModule } from '@angular/material/input';
 import { User } from '../../models/user.class';
-import { Firestore } from '@angular/fire/firestore';
+import { Firestore, setDoc, doc, collection } from '@angular/fire/firestore';
 
 
 @Component({
@@ -37,5 +37,11 @@ export class DialogEditAddressComponent {
   constructor(public dialogRef: MatDialogRef<DialogEditAddressComponent>) {}
 
 
-  saveUser() {}
+  saveUser() {
+    this.loading = true;
+    setDoc(doc(collection(this.firestore, 'users'), this.userId), this.user.toJSON()).then(() => {
+      this.loading = false;
+      this.dialogRef.close();      
+    });
+  }
 }
