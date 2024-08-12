@@ -28,15 +28,26 @@ import { Firestore, setDoc, doc, collection } from '@angular/fire/firestore';
   styleUrl: './dialog-edit-address.component.scss'
 })
 export class DialogEditAddressComponent {
-  user = new User();
-  userId!: string;
-  loading = false;
-  firestore: Firestore = inject(Firestore);
+  user = new User(); // The user object to be edited.
+  userId!: string; // The ID of the user to be edited.
+  loading = false; // Flag indicating if the form is in a loading state.
+  firestore: Firestore = inject(Firestore); // Firestore instance for interacting with the Firestore database.
 
 
+  /** 
+   * Constructor for the DialogEditAddressComponent.
+   * 
+   * @param dialogRef - The reference to the dialog for closing it upon save.
+   */
   constructor(public dialogRef: MatDialogRef<DialogEditAddressComponent>) {}
 
 
+  /**
+   * Saves the edited user address to Firestore and closes the dialog.
+   * 
+   * Sets the loading flag to true while the operation is in progress, 
+   * and sets it back to false upon completion.
+   */
   saveUser() {
     this.loading = true;
     setDoc(doc(collection(this.firestore, 'users'), this.userId), this.user.toJSON()).then(() => {

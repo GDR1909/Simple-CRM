@@ -34,18 +34,27 @@ import { Firestore, setDoc, doc, collection } from '@angular/fire/firestore';
   styleUrl: './dialog-edit-user.component.scss'
 })
 export class DialogEditUserComponent {
-  user = new User();
-  userId!: string;
-  birthDate!: Date;
-  loading = false;
-  firestore: Firestore = inject(Firestore);
+  user = new User(); // The user object being edited.
+  userId!: string; // The ID of the user being edited.
+  birthDate!: Date; // The selected birth date of the user.
+  loading = false; // Indicates if the form is currently loading.
+  firestore: Firestore = inject(Firestore); // Firestore instance for database operations.
 
 
+  /**
+   * Constructs the `DialogEditUserComponent` with dependency injection for Firestore and dialog reference.
+   * @param dialogRef - Reference to the dialog instance for closing it.
+   */
   constructor(public dialogRef: MatDialogRef<DialogEditUserComponent>) {
     this.birthDate = new Date();
   }
 
 
+  /**
+   * Saves the updated user information to Firestore.
+   * Sets the user's birth date and updates the Firestore document with the given user ID.
+   * Closes the dialog once the save operation is complete.
+   */
   saveUser() {
     this.loading = true;
     setDoc(doc(collection(this.firestore, 'users'), this.userId), this.user.toJSON()).then(() => {

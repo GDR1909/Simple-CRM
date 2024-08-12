@@ -9,11 +9,11 @@
                 <th>City</th>
             </tr>
 
-            @for (user of allUsers; track $index) {
-                <tr [routerLink]="['/user/' + user.id]">
-                    <td>{{ user.firstName }} {{ user.lastName }}</td>
-                    <td>{{ user.email }}</td>
-                    <td>{{ user.city }}</td>
+            @for (user of allUsers; track $index) { <!-- Iterate over the `allUsers` array and generate a table row for each user -->
+                <tr [routerLink]="['/user/' + user.id]"> <!-- Each row is clickable and navigates to the user's detail page -->
+                    <td>{{ user.firstName }} {{ user.lastName }}</td> <!-- Display user's full name -->
+                    <td>{{ user.email }}</td> <!-- Display user's email -->
+                    <td>{{ user.city }}</td> <!-- Display user's city -->
                 </tr>
             }
         </tbody>

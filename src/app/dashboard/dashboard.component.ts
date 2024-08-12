@@ -8,5 +8,6 @@ import { Component } from '@angular/core';
   styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent {
-
+  // The component logic will go here.
+  // Currently, this component does not have any logic.
 }

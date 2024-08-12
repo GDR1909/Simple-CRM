@@ -19,13 +19,18 @@ import { DialogEditUserComponent } from '../dialog-edit-user/dialog-edit-user.co
   styleUrl: './user-detail.component.scss'
 })
 export class UserDetailComponent {
-  userId: any = '';
-  user: User = new User();
-  firestore: Firestore = inject(Firestore);
-  public dialog = inject(MatDialog);
+  userId: any = ''; // ID of the user retrieved from route parameters.
+  user: User = new User(); // Instance of the User class to hold user details.
+  firestore: Firestore = inject(Firestore); // Firestore service instance for database operations.
+  public dialog = inject(MatDialog); // Dialog service for opening dialog components.
 
 
+  /**
+   * Constructor to initialize the component.
+   * @param route ActivatedRoute service to access route parameters.
+   */
   constructor(private route: ActivatedRoute) {
+    // Subscribe to route parameters to get the user ID from the URL and fetch user data.
     this.route.paramMap.subscribe(paramMap => {
       this.userId = paramMap.get('id');
       console.log('GOT ID:', this.userId);
@@ -34,6 +39,9 @@ export class UserDetailComponent {
   }
 
 
+  /**
+   * Fetches user details from Firestore and updates the `user` property.
+   */
   getUser() {
     onSnapshot(doc(collection(this.firestore, 'users'), this.userId), ((user) => {
       this.user = new User(user.data());
@@ -42,15 +50,23 @@ export class UserDetailComponent {
   }
 
 
+  /**
+   * Opens a dialog to edit user details.
+   */
   editUserDetail() {
     const dialog = this.dialog.open(DialogEditUserComponent);
+    // Pass the current user details and ID to the dialog component.
     dialog.componentInstance.user = new User(this.user.toJSON());
     dialog.componentInstance.userId = this.userId;
   }
 
 
+  /**
+   * Opens a dialog to edit user address.
+   */
   editMenu() {
     const dialog = this.dialog.open(DialogEditAddressComponent);
+    // Pass the current user details and ID to the dialog component.
     dialog.componentInstance.user = new User(this.user.toJSON());
     dialog.componentInstance.userId = this.userId;
   }

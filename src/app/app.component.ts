@@ -1,11 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  RouterLink,
-  RouterLinkActive,
-  RouterModule,
-  RouterOutlet,
-} from '@angular/router';
+import { RouterLink, RouterLinkActive, RouterModule, RouterOutlet } from '@angular/router';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -29,13 +24,22 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     MatDialogModule,
     MatInputModule,
     MatFormFieldModule,
-    MatDatepickerModule,
+    MatDatepickerModule
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
+  /**
+   * The title of the application.
+   * 
+   * @type {string}
+   */
   title = 'simple-crm';
 
+
+  /**
+   * Initializes a new instance of the AppComponent class.
+   */
   constructor() {}
 }
